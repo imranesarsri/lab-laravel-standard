@@ -1,66 +1,191 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# lab laravel basic
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Travail à faire
+- install `adminLTE` by npm
+- Ajouter la base de données incluant la table des projets dans les `seeders`
+- Créer le `CRUD` des tâches
+- Ajouter la `pagination`
+- Inclure la `recherche` et `filter` en utilisant `AJAX`
+- Design patterns : `repository`
 
-## About Laravel
+## 1. Installation Laravel 
+```bash
+composer create-project laravel/laravel .
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 2. Installing AdminLTE
+1. Installing prerequisites
+- Node.js
+- NPM
+- PHP 7.2.5 ou supérieur
+- Un serveur web (Apache, Nginx, etc.)
+2. Installing AdminLTE
+```bash
+npm install admin-lte@3.1.0
+```
+3. Publishing AdminLTE assets
+```bash
+php artisan vendor:publish --provider="AdminLTE\AdminLTEServiceProvider"
+```
+4. Importing AdminLTE CSS and JavaScript
+- In `resources/css/app.css`, import the CSS from AdminLTE and Font Awesome:\
+```bash
+@import 'admin-lte/plugins/fontawesome-free/css/all.min.css';
+@import 'admin-lte/dist/css/adminlte.min.css';
+```
+- In `resources/js/app.js`, import the AdminLTE JavaScript:
+```bash
+import 'admin-lte/dist/js/adminlte';
+```
+5. Install dependencies and build assets
+```bash
+npm install
+npm run dev
+```
+6. Configuring Laravel to use Vite
+Open your Laravel layout file (for example, resources/views/layouts/app.blade.php) and include the Vite assets:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```bash
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+```
+## 3. Installing FontAwesome Icons 
+```bash
+npm install @fortawesome/fontawesome-free
+```
+```bash
+@import "@fortawesome/fontawesome-free/css/all.css";
+```
+[karans.com](https://www.karans.com.np/laravel-10/how-to-install-fontawesome-icons-in-laravel-10/)
+___
+## 4 Add the database including the projects table in the seeders
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Databases
+#### 1. Env
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=lab_crud_laravel_basic
+DB_USERNAME=root
+DB_PASSWORD=solicoders
+```
 
-## Learning Laravel
+#### 2. Migrations
+```bash
+php artisan make:migration create_projects_table
+php artisan make:migration create_tasks_table
+```
+```php
+Schema::create('projects', function (Blueprint $table) {
+    $table->id();
+    $table->string('name', 50)->unique();
+    $table->text('description')->nullable();
+    $table->timestamps();
+});
+```
+```php
+Schema::create('tasks', function (Blueprint $table) {
+    $table->id();
+    $table->string('name', 50)->unique();
+    $table->text('description')->nullable();
+    $table->unsignedBigInteger('project_id');
+    $table->foreign('project_id')->references('id')->on('projects');
+    $table->timestamps();
+});
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+##### Running Migrations:
+```bash
+php artisan migrate
+```
+[Reference Laravel Migrations](https://laravel.com/docs/10.x/migrations#main-content)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### 3. Models
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+php artisan make:model Project -m
+php artisan make:model Task -m
+```
 
-## Laravel Sponsors
+##### Project file
+```php
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+##### Task file
+```php
+    protected $fillable = [
+        'name',
+        'description',
+        'project_id',
+    ];
+```
 
-### Premium Partners
+#### 4. Seeders
+```bash
+php artisan make:seeder ProjectSeeder
+php artisan make:seeder TaskSeeder
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+##### ProjectSeeder file
+```php
+public function run(): void
+{
+    Project::create([
+        'name' => 'Portfolio',
+        'description' => 'Développement d\'un site web mettant en valeur nos compétences.',
+    ]);
 
-## Contributing
+    Project::create([
+        'name' => 'Arbre des compétences',
+        'description' => 'Création d\'une application web pour l\'évaluation des compétences.',
+    ]);
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    Project::create([
+        'name' => 'CNMH',
+        'description' => 'Création d\'une application web pour la gestion des patients de centre CNMH.',
+    ]);
+}
+```
+##### TaskSeeder file
+```php
+public function run(): void
+    {
+        Task::create([
+            'name' => 'Design Product Pages',
+            'description' => 'Create user-friendly product pages with images and descriptions',
+            'project_id' => '1',
+        ]);
 
-## Code of Conduct
+        Task::create([
+            'name' => 'Implement Shopping Cart',
+            'description' => 'Develop a functional shopping cart for users to add and manage items',
+            'project_id' => '1',
+        ]);
+    }
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+##### DatabaseSeeder file
+```php
+class DatabaseSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $this->call([
+            ProjectSeeder::class,
+        ]);
+    }
+}
+```
 
-## Security Vulnerabilities
+##### Running Seeders
+```bash
+php artisan db:seed
+```
+[Reference Laravel seeders](https://laravel.com/docs/10.x/seeding#writing-seeders)
+___
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
