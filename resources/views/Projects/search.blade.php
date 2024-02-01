@@ -1,13 +1,10 @@
-@foreach ($projects as $project)
+@foreach ($Projects as $Project)
     <tr>
-        <td>{{ $project->name }}</td>
-        <td>{{ $project->description }}</td>
-
-        {{-- <td>{{ $Project->project->name }}</td> --}}
-
+        <td>{{ $Project->name }}</td>
+        <td>{{ $Project->description }}</td>
 
         <td class="">
-            <a href="{{ route('task', ['task' => $project->id]) }}" class="btn btn-sm btn-default mx-2">
+            <a href="{{ route('task', ['task' => $Project]) }}" class="btn btn-sm btn-default mx-2">
                 <i class="fa-solid fa-eye"></i>
             </a>
         </td>
@@ -18,7 +15,7 @@
     <td></td>
     <td>
         <div class="pagination m-0 float-right">
-            {{ $projects->links() }}
+            {{ $Projects->links() }}
         </div>
 
     </td>

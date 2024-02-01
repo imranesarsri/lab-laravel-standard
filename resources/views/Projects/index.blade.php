@@ -24,9 +24,9 @@
                                         <select name="project_id" class="form-select form-control"
                                             id="filterSelectProjrctValue" aria-label="Filter Select">
                                             <option value="Tout le projet">Tout le projet</option>
-                                            @foreach ($projectsFilter as $projectFilter)
-                                                <option value="{{ $projectFilter->name }}">
-                                                    {{ $projectFilter->name }}
+                                            @foreach ($ProjectsFilter as $ProjectFilter)
+                                                <option value="{{ $ProjectFilter->name }}">
+                                                    {{ $ProjectFilter->name }}
                                                 </option>
                                             @endforeach
                                         </select>

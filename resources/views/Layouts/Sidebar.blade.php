@@ -12,7 +12,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ route('project.index') }}" class="nav-link ">
+                    <a href="{{ route('projects.index') }}" class="nav-link ">
                         <i class="fa-solid fa-bars-progress mx-2"></i>
                         <p>
                             Projets
@@ -20,7 +20,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('task.index') }}" class="nav-link ">
+                    <a href="{{ route('tasks.index') }}" class="nav-link ">
                         <i class="fa-solid fa-list-check mx-2"></i>
                         <p>
                             Tâches
