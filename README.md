@@ -57,4 +57,49 @@ npm install @fortawesome/fontawesome-free
 ```
 [karans.com](https://www.karans.com.np/laravel-10/how-to-install-fontawesome-icons-in-laravel-10/)
 ___
+## Model
+```bash
+php artisan make:model Task
+php artisan make:model Project
+```
 
+## Databases
+### .env
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=lab_crud_laravel_standard
+DB_USERNAME=root
+DB_PASSWORD=solicoders
+```
+### Migrations
+#### Generating Migrations
+```bash
+php artisan make:migration create_tasks_table
+php artisan make:migration create_projects_table
+```
+
+#### Running Migrations
+```bash
+php artisan migrate
+```
+
+### Seeding
+#### Writing Seeders
+```bash
+php artisan make:seeder TaskSeeder
+php artisan make:seeder ProjectSeeder
+```
+
+#### Generating Factories
+```bash
+php artisan make:factory TaskFactory
+php artisan make:factory ProjectFactory
+```
+
+### Running Seeders
+```bash
+php artisan db:seed
+```
+ <!-- php artisan migrate:fresh -->
