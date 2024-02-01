@@ -23,7 +23,7 @@
                                                 class="fas fa-filter"></i></label>
                                         <select name="project_id" class="form-select form-control"
                                             id="filterSelectProjrctValue" aria-label="Filter Select">
-                                            <option value="Tout le projet">Tout le projet</option>
+                                            <option value="Tout le projets">Tout le projets</option>
                                             @foreach ($ProjectsFilter as $ProjectFilter)
                                                 <option value="{{ $ProjectFilter->name }}">
                                                     {{ $ProjectFilter->name }}
@@ -55,13 +55,12 @@
         $(document).ready(function() {
             function fetchData(page, searchTaskValue, selectProjrctValue) {
                 $.ajax({
-                    url: '?page=' + page + '&searchTaskValue=' + searchTaskValue +
+                    url: 'projects?page=' + page + '&searchTaskValue=' + searchTaskValue +
                         '&selectProjrctValue=' +
                         selectProjrctValue,
                     success: function(data) {
                         $('tbody').html('');
                         $('tbody').html(data);
-                        // console.log(data);
                     }
                 });
                 console.log(page);
@@ -70,14 +69,11 @@
             }
 
             $('body').on('click', '.pagination a', function(e) {
-
                 e.preventDefault();
 
                 let page = $(this).attr('href').split('page=')[1];
                 let searchTaskValue = $('#searchInput').val();
                 let selectProjrctValue = $('#filterSelectProjrctValue').val();
-                // console.log($(this).attr('href').split('page=')[1]);
-                // console.log($(this).attr('href'));
                 fetchData(page, searchTaskValue, selectProjrctValue);
 
             });

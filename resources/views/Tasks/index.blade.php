@@ -74,7 +74,7 @@
         $(document).ready(function() {
             function fetchData(page, searchTaskValue, selectProjrctValue) {
                 $.ajax({
-                    url: 'task/?page=' + page + '&searchTaskValue=' + searchTaskValue +
+                    url: 'tasks/?page=' + page + '&searchTaskValue=' + searchTaskValue +
                         '&selectProjrctValue=' +
                         selectProjrctValue,
                     success: function(data) {
