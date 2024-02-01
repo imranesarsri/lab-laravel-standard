@@ -10,14 +10,14 @@
                         <div class="card-header">
                             <h3 class="card-title">Ajouter Une Tâche</h3>
                         </div>
-                        <form action="{{ route('task.store') }}" method="post">
+                        <form action="{{ route('tasks.store') }}" method="post">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="Projet">Projet <span class="text-danger">*</span></label>
                                     <select name="project_id" id="Projet" class="custom-select">
-                                        @foreach ($projects as $project)
-                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                        @foreach ($ProjectsFilter as $ProjectFilter)
+                                            <option value="{{ $ProjectFilter->id }}">{{ $ProjectFilter->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <a href="{{ route('task.index') }}" class="btn btn-default">annuler</a>
+                                <a href="{{-- route('tasks.index') --}}" class="btn btn-default">annuler</a>
                                 <button type="submit" class="btn btn-primary">Ajouter</button>
                             </div>
                         </form>

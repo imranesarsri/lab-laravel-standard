@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="float-sm-right">
-                        <a href="{{ route('task.create') }}" class="btn btn-sm btn-primary">Ajouter tâche</a>
+                        <a href="{{ route('tasks.create') }}" class="btn btn-sm btn-primary">Ajouter tâche</a>
                     </div>
                 </div>
             </div>
@@ -39,13 +39,13 @@
                                                 class="fas fa-filter"></i></label>
                                         <select name="project_id" class="form-select form-control"
                                             id="filterSelectProjrctValue" aria-label="Filter Select">
-                                            {{-- @isset($task)
+                                            {{-- @isset($Task)
 
                                             @endisset --}}
                                             <option value="Tout le projet">Tout le projet</option>
-                                            @foreach ($projectsFilter as $projectFilter)
-                                                <option @selected($projectFilter->id == $task) value="{{ $projectFilter->id }}">
-                                                    {{ $projectFilter->name }}
+                                            @foreach ($ProjectsFilter as $ProjectFilter)
+                                                <option @selected($ProjectFilter->id == $Task) value="{{ $ProjectFilter->id }}">
+                                                    {{ $ProjectFilter->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -74,7 +74,7 @@
         $(document).ready(function() {
             function fetchData(page, searchTaskValue, selectProjrctValue) {
                 $.ajax({
-                    url: 'task/?page=' + page + '&searchTaskValue=' + searchTaskValue +
+                    url: 'tasks/?page=' + page + '&searchTaskValue=' + searchTaskValue +
                         '&selectProjrctValue=' +
                         selectProjrctValue,
                     success: function(data) {

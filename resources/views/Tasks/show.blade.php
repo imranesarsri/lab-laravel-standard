@@ -9,7 +9,7 @@
                     <h1 class="card-title">Détail s de {{ $task->name }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-default float-right" href="{{ route('task.index') }}">Retour</a>
+                    <a class="btn btn-default float-right" href="{{ route('tasks.index') }}">Retour</a>
                 </div>
             </div>
         </div>
@@ -27,8 +27,6 @@
                         <label for="nom">Nom du projet: </label>
                         <p>{{ $task->project->name }}</p>
                     </div>
-
-
                     <div class="col-sm-12">
                         <label for="description">Description: </label>
                         <p>{{ $task->description }}</p>

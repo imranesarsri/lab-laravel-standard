@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Lab crud laravel basic</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body class="sidebar-mini" style="height: auto;">
@@ -21,8 +22,10 @@
 
         @include('Layouts.Footer')
 
-
     </div>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     @yield('script_ajax')
 </body>
 
