@@ -3,7 +3,7 @@
         <td>{{ $Task->name }}</td>
         <td>{{ $Task->project->name }}</td>
 
-        <td>{{ Str::limit($Task->description, 85) }}</td>
+        <td>{{ Str::limit($Task->description, 60) }}</td>
 
         <td class="d-flex">
             <a href="{{ route('tasks.show', $Task->id) }}" class="btn btn-sm btn-default">

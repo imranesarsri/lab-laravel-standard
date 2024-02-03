@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Repositories\TaskRepository;
 use App\Http\Requests\FormTaskRequest;
 
+
 class TaskController extends Controller
 {
     protected $TaskRepository;
@@ -16,14 +17,17 @@ class TaskController extends Controller
         $this->TaskRepository = $TaskRepository;
     }
 
-
     public function index(Request $request)
     {
         $ProjectsFilter = Project::all();
         $Task = $request->route('task');
-        $Tasks = $this->TaskRepository->getData();
+        $Tasks = $this->TaskRepository->searchAndFilter($request);
+        if ($request->ajax()) {
+            return view('Tasks.search', compact('Tasks'))->render();
+        }
         return view('Tasks.index', compact('Tasks', 'ProjectsFilter', 'Task'));
     }
+
 
 
     public function create()
@@ -57,14 +61,14 @@ class TaskController extends Controller
 
     public function update(FormTaskRequest $request, Task $task)
     {
-        $this->TaskRepository->edit($request->validated(), $task);
+        $this->TaskRepository->update($task, $request->validated());
         return redirect()->route('tasks.index')->with('success', 'Tâche mise à jour avec succès !');
     }
 
 
     public function destroy(Task $task)
     {
-        $this->TaskRepository->destroy($task);
+        $this->TaskRepository->delete($task);
         return redirect()->route('tasks.index')->with('success', 'Tâche supprimée avec succès !');
     }
 }
