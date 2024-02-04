@@ -1,10 +1,11 @@
-@foreach ($Projects as $Project)
+@foreach ($projects as $project)
     <tr>
-        <td>{{ $Project->name }}</td>
-        <td>{{ $Project->description }}</td>
+        <td>{{ $project->name }}</td>
+        <td>{{ Str::limit($project->description, 100) }}</td>
+
 
         <td class="">
-            <a href="{{ route('task', ['task' => $Project]) }}" class="btn btn-sm btn-default mx-2">
+            <a href="{{ route('task', $project->id) }}" class="btn btn-sm btn-default mx-2">
                 <i class="fa-solid fa-eye"></i>
             </a>
         </td>
@@ -15,7 +16,7 @@
     <td></td>
     <td>
         <div class="pagination m-0 float-right">
-            {{ $Projects->links() }}
+            {{ $projects->links() }}
         </div>
 
     </td>

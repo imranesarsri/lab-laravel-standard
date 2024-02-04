@@ -5,17 +5,28 @@ use App\Models\Project;
 
 class ProjectRepository extends BaseRepository
 {
-    public function __construct(Project $Project)
+    public function __construct(Project $project)
     {
-        parent::__construct($Project);
-    }
-    public function getData()
-    {
-        return parent::getData()->paginate(5);
-    }
-    public function projectsFilter()
-    {
-        return parent::getData()->select('id', 'name')->get();
+        parent::__construct($project);
     }
 
+    public function applySearchCriteria($query, $searchValue)
+    {
+        return $query->where('name', 'like', '%' . $searchValue . '%');
+    }
+
+    public function applyFilterCriteria($query, $filterValue)
+    {
+        return $query->where('id', $filterValue);
+    }
+
+    public function searchAndFilter($request)
+    {
+        return parent::searchAndFilter($request)->paginate(5);
+    }
+
+    public function projectFilters()
+    {
+        return Project::select('id', 'name')->get();
+    }
 }

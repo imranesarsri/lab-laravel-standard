@@ -19,14 +19,14 @@
                             <div class="row d-flex justify-content-between">
                                 <div class="col-4">
                                     <div class="input-group">
-                                        <label class="input-group-text" for="filterSelectProjrctValue"><i
+                                        <label class="input-group-text" for="filterselectProjectValue"><i
                                                 class="fas fa-filter"></i></label>
                                         <select name="project_id" class="form-select form-control"
-                                            id="filterSelectProjrctValue" aria-label="Filter Select">
+                                            id="filterselectProjectValue" aria-label="Filter Select">
                                             <option value="Tout le projets">Tout le projets</option>
-                                            @foreach ($ProjectsFilter as $ProjectFilter)
-                                                <option value="{{ $ProjectFilter->name }}">
-                                                    {{ $ProjectFilter->name }}
+                                            @foreach ($projectsFilter as $projectFilter)
+                                                <option value="{{ $projectFilter->id }}">
+                                                    {{ $projectFilter->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -53,11 +53,11 @@
 @section('script_ajax')
     <script>
         $(document).ready(function() {
-            function fetchData(page, searchTaskValue, selectProjrctValue) {
+            function fetchData(page, searchTaskValue, selectProjectValue) {
                 $.ajax({
                     url: 'projects?page=' + page + '&searchTaskValue=' + searchTaskValue +
-                        '&selectProjrctValue=' +
-                        selectProjrctValue,
+                        '&selectProjectValue=' +
+                        selectProjectValue,
                     success: function(data) {
                         $('tbody').html('');
                         $('tbody').html(data);
@@ -65,7 +65,7 @@
                 });
                 console.log(page);
                 console.log(searchTaskValue);
-                console.log(selectProjrctValue);
+                console.log(selectProjectValue);
             }
 
             $('body').on('click', '.pagination a', function(e) {
@@ -73,24 +73,24 @@
 
                 let page = $(this).attr('href').split('page=')[1];
                 let searchTaskValue = $('#searchInput').val();
-                let selectProjrctValue = $('#filterSelectProjrctValue').val();
-                fetchData(page, searchTaskValue, selectProjrctValue);
+                let selectProjectValue = $('#filterselectProjectValue').val();
+                fetchData(page, searchTaskValue, selectProjectValue);
 
             });
 
             $('body').on('keyup', '#searchInput', function() {
                 let page = $('#page').val();
                 let searchTaskValue = $('#searchInput').val();
-                let selectProjrctValue = $('#filterSelectProjrctValue').val();
+                let selectProjectValue = $('#filterselectProjectValue').val();
 
-                fetchData(page, searchTaskValue, selectProjrctValue);
+                fetchData(page, searchTaskValue, selectProjectValue);
             });
 
-            $('#filterSelectProjrctValue').on('change', function() {
+            $('#filterselectProjectValue').on('change', function() {
                 let page = $('#page').val();
                 let searchTaskValue = $('#searchInput').val();
-                let selectProjrctValue = $(this).val();
-                fetchData(page, searchTaskValue, selectProjrctValue);
+                let selectProjectValue = $(this).val();
+                fetchData(page, searchTaskValue, selectProjectValue);
             });
 
         });
