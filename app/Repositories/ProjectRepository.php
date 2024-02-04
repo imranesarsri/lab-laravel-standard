@@ -24,8 +24,9 @@ class ProjectRepository extends BaseRepository
     {
         return parent::searchAndFilter($request)->paginate(5);
     }
+
     public function projectFilters()
     {
-        return $this->model->select('id', 'name')->get();
+        return Project::select('id', 'name')->get();
     }
 }

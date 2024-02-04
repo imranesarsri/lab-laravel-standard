@@ -25,8 +25,4 @@ class ProjectController extends Controller
         return view('Projects.index', compact('projects', 'projectsFilter'));
     }
 
-    public function store(FormTaskRequest $request)
-    {
-        $this->projectRepository->create($request->validated());
-    }
 }

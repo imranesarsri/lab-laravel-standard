@@ -18,10 +18,10 @@
                                 <div class="form-group">
                                     <label for="Projet">Projet<span class="text-danger">*</span></label>
                                     <select id="Projet" name="project_id" class="custom-select">
-                                        @foreach ($projects as $project)
-                                            <option @selected($project->id == $task->project->id) value="{{ $project->id }}"
-                                                name="{{ $project->id }}">
-                                                {{ $project->name }}
+                                        @foreach ($ProjectsFilter as $ProjectFilter)
+                                            <option @selected($ProjectFilter->id == $task->project->id) value="{{ $ProjectFilter->id }}"
+                                                name="{{ $ProjectFilter->id }}">
+                                                {{ $ProjectFilter->name }}
                                             </option>
                                         @endforeach
                                     </select>
