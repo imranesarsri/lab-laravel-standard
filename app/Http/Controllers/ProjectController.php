@@ -18,12 +18,10 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $projects = $this->projectRepository->searchAndFilter($request);
-
+        $projectsFilter = $this->projectRepository->projectFilters();
         if ($request->ajax()) {
             return view('Projects.search', compact('projects'))->render();
         }
-
-        $projectsFilter = $this->projectRepository->projectFilters();
         return view('Projects.index', compact('projects', 'projectsFilter'));
     }
 

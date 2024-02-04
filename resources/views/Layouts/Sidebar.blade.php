@@ -21,7 +21,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('tasks.index') }}" class="nav-link {{ Request::is('tasks') ? 'active' : '' }}">
+                    <a href="{{ route('tasks.index') }}"
+                        class="nav-link {{ Request::is('tasks') || Request::is('task/*') ? 'active' : '' }}">
                         <i class="fa-solid fa-list-check mx-2"></i>
                         <p>
                             Tâches

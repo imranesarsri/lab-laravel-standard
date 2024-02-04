@@ -74,13 +74,12 @@
         $(document).ready(function() {
             function fetchData(page, searchTaskValue, selectProjectValue) {
                 $.ajax({
-                    url: 'tasks/?page=' + page + '&searchTaskValue=' + searchTaskValue +
+                    url: '?page=' + page + '&searchTaskValue=' + searchTaskValue +
                         '&selectProjectValue=' +
                         selectProjectValue,
                     success: function(data) {
                         $('tbody').html('');
                         $('tbody').html(data);
-                        // console.log(data);
                     }
                 });
                 console.log(page);
@@ -89,23 +88,17 @@
             }
 
             $('body').on('click', '.pagination a', function(e) {
-
                 e.preventDefault();
-
                 let page = $(this).attr('href').split('page=')[1];
                 let searchTaskValue = $('#searchInput').val();
                 let selectProjectValue = $('#filterSelectProjetValue').val();
-                // console.log($(this).attr('href').split('page=')[1]);
-                // console.log($(this).attr('href'));
                 fetchData(page, searchTaskValue, selectProjectValue);
-
             });
 
             $('body').on('keyup', '#searchInput', function() {
                 let page = $('#page').val();
                 let searchTaskValue = $('#searchInput').val();
                 let selectProjectValue = $('#filterSelectProjetValue').val();
-
                 fetchData(page, searchTaskValue, selectProjectValue);
             });
 

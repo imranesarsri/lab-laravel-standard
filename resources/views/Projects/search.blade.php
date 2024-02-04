@@ -5,7 +5,7 @@
 
 
         <td class="">
-            <a href="{{ route('task', ['task' => $project]) }}" class="btn btn-sm btn-default mx-2">
+            <a href="{{ route('task', $project->id) }}" class="btn btn-sm btn-default mx-2">
                 <i class="fa-solid fa-eye"></i>
             </a>
         </td>
