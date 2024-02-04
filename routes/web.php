@@ -24,3 +24,6 @@ Route::get('/', function () {
 Route::resource('tasks', TaskController::class);
 Route::resource('projects', ProjectController::class);
 Route::get('task/{id}', [TaskController::class, 'index'])->name('task');
+Route::fallback(function () {
+    return view('Layouts.Error404');
+});
