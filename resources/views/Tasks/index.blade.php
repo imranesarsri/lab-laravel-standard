@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Liste des tâche</h1>
+                    <h1>Liste des tâches</h1>
                 </div>
                 <div class="col-sm-6">
                     <div class="float-sm-right">
