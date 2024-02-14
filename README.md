@@ -1,4 +1,4 @@
-# lab laravel basic
+# Lab laravel standard
 
 ## Travail à faire
 - install `adminLTE` by npm
