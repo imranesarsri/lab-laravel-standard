@@ -2,21 +2,20 @@
 namespace App\Repositories;
 
 use App\Models\Task;
-use Illuminate\Http\Request;
 
 class TaskRepository extends BaseRepository
 {
-    public function __construct(Task $Task)
+    public function __construct(Task $task)
     {
-        parent::__construct($Task);
+        parent::__construct($task);
     }
 
-    public function applySearchCriteria($query, $searchValue)
+    protected function applySearchCriteria($query, $searchValue)
     {
         return $query->with('project')->where('name', 'like', '%' . $searchValue . '%');
     }
 
-    public function applyFilterCriteria($query, $filterValue)
+    protected function applyFilterCriteria($query, $filterValue)
     {
         return $query->with('project')->where('project_id', $filterValue);
     }
@@ -30,5 +29,4 @@ class TaskRepository extends BaseRepository
     {
         return parent::getData()->where('project_id', $filterValue)->paginate(5);
     }
-
 }

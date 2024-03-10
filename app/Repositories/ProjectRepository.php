@@ -10,12 +10,12 @@ class ProjectRepository extends BaseRepository
         parent::__construct($project);
     }
 
-    public function applySearchCriteria($query, $searchValue)
+    protected function applySearchCriteria($query, $searchValue)
     {
         return $query->where('name', 'like', '%' . $searchValue . '%');
     }
 
-    public function applyFilterCriteria($query, $filterValue)
+    protected function applyFilterCriteria($query, $filterValue)
     {
         return $query->where('id', $filterValue);
     }

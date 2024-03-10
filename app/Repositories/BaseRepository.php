@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,7 +6,7 @@ use Illuminate\Http\Request;
 
 abstract class BaseRepository
 {
-    protected $model;
+    protected Model $model;
 
     public function __construct(Model $model)
     {
@@ -24,14 +23,14 @@ abstract class BaseRepository
         return $this->model->create($data);
     }
 
-    public function update(Model $model, array $data)
+    public function update($obj, array $data)
     {
-        return $model->update($data);
+        return $obj->update($data);
     }
 
-    public function delete(Model $model)
+    public function delete($obj)
     {
-        return $model->delete();
+        return $obj->delete();
     }
 
     public function searchAndFilter(Request $request)
@@ -45,23 +44,17 @@ abstract class BaseRepository
         }
 
         if ($searchValue) {
-            $this->applySearchCriteria($query, $searchValue);
+            $query = $this->applySearchCriteria($query, $searchValue);
         }
 
         if ($filterValue && $filterValue !== "Tout le projets") {
-            $this->applyFilterCriteria($query, $filterValue);
+            $query = $this->applyFilterCriteria($query, $filterValue);
         }
+
         return $query;
     }
 
-    public function applySearchCriteria($query, $searchValue)
-    {
-        return $query;
-    }
+    abstract protected function applySearchCriteria($query, $searchValue);
 
-    public function applyFilterCriteria($query, $filterValue)
-    {
-        return $query;
-    }
-
+    abstract protected function applyFilterCriteria($query, $filterValue);
 }
